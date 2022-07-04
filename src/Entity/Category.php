@@ -26,7 +26,7 @@ class Category
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
      */
-    private $posts;
+    private $posts; //1 post only have 1 category
 
     public function getId(): ?int
     {

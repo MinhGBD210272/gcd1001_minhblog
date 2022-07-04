@@ -30,7 +30,7 @@ class Post
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
      */
-    private $category;
+    private $category; //1 category can have many posts
 
     /**
      * @ORM\Column (type="datetime")
