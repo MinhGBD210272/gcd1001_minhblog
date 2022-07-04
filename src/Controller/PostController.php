@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Form\PostType;
 use App\Repository\PostRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,6 +30,26 @@ class PostController extends AbstractController
             'posts' => $posts
         ]);
     }
+
+    /**
+     * @Route("/post/new", name="post_new")
+     */
+    public function create(Request $request){
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $post->setCreatedAt(new \DateTime());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+        }
+        return $this->render('post/new.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+
     /**
      * @Route ("/post/{id}", name="post_show")
      * @return Response
@@ -41,10 +62,5 @@ class PostController extends AbstractController
             'post'=>$post
         ]);
     }
-    /**
-     * @Route("/post/new", name="post_new")
-     */
-    public function create(Request $request){
 
-    }
 }
