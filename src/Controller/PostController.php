@@ -41,4 +41,10 @@ class PostController extends AbstractController
             'post'=>$post
         ]);
     }
+    /**
+     * @Route("/post/new", name="post_new")
+     */
+    public function create(Request $request){
+
+    }
 }
