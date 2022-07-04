@@ -43,6 +43,12 @@ class PostController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
+            $this->addFlash(
+                'Success',
+                'Your post was added'
+            );
+
+            return $this->redirectToRoute('app_post');
         }
         return $this->render('post/new.html.twig',[
             'form' => $form->createView()
@@ -52,7 +58,6 @@ class PostController extends AbstractController
 
     /**
      * @Route ("/post/{id}", name="post_show")
-     * @return Response
      */
     public function show(Request $request, PostRepository $postRepository)
     {
@@ -62,5 +67,25 @@ class PostController extends AbstractController
             'post'=>$post
         ]);
     }
-
+    /**
+     * @Route ("/post/{id}/edit", name="post_edit")
+     */
+    public function edit(Post $post, Request $request){
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+            $this->addFlash(
+                'Success',
+                'Your post was edited'
+            );
+            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
+        }
+        return $this->render('/post/edit.html.twig', [
+            'post' => $post,
+            'editForm' => $form->createView()
+        ]);
+    }
 }

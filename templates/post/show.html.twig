@@ -15,6 +15,13 @@
             border-radius: 10px;
         }
     </style>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-5 text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <section class="posts">
         <article>
             <h2>{{ post.title }}</h2>
@@ -26,7 +33,7 @@
             <div class="content">
                 <img src="https://images.yourstory.com/cs/wordpress/2017/06/106_5-tips-to-hustle-your-way-to-success.jpg?fm=auto&ar=2:1&mode=crop&crop=faces&w=720" alt="" class="mt-3 mb-3">
                 <p>{{ post.content }}</p>
-                <a href="#">Read More</a>
+                <a href="{{ path('post_edit', {'id': post.id}) }}">Edit the post</a>
             </div>
         </article>
     </section>

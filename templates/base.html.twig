@@ -17,15 +17,15 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">My Blog</a>
+        <a class="navbar-brand" href="{{ path('app_post') }}">My Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Posts
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Posts
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
@@ -39,7 +39,7 @@
                     <a class="nav-link" href="#">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Create a Post</a>
+                    <a class="nav-link" href="{{ path('post_new') }}">Create a Post</a>
                 </li>
             </ul>
         </div>
